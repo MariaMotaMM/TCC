@@ -29,6 +29,10 @@ class UsuarioCreate(BaseModel):
     nome: str
     email: EmailStr
     senha: str
+    
+class UsuarioUpdate(BaseModel):
+    nome: str | None = None
+    senha: str | None = None
 
 class UsuarioLogin(BaseModel):
     email: EmailStr
@@ -45,3 +49,7 @@ class UsuarioResponse(BaseModel):
 class FavoritoCreate(BaseModel):
     usuario_id: int
     veiculo_id: int
+    
+class EmailRequest(BaseModel):
+    email: str
+    

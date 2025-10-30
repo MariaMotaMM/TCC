@@ -182,12 +182,13 @@ const toggleFavorito = async (item: any, fallbackIndex: number) => {
 
     const marca = item.marca ?? item.MARCA ?? '';
     const modelo = item.modelo ?? item.MODELO ?? '';
-    const ano = item.ano ?? item.ANO ?? ''
+    const ano = Math.floor(item.ano ?? item.ANO ?? '');
     const id = getId(item, index);
     const imagemUri =
-      typeof item.imagem === 'string' && item.imagem.length > 0
-        ? item.imagem
-        : 'https://cdn-icons-png.flaticon.com/512/744/744465.png';
+  item.imagem_url && item.imagem_url.length > 0
+    ? { uri: `http://10.0.2.2:8000${item.imagem_url}` } // CORRETO
+    : { uri: 'https://cdn-icons-png.flaticon.com/512/744/744465.png' }; // fallback online
+
     const ehFavorito = !!favoritos[id];
 
     return (
@@ -215,7 +216,7 @@ const toggleFavorito = async (item: any, fallbackIndex: number) => {
             })
           }
         >
-          <Image source={{ uri: imagemUri }} style={estilos.imagemCarro} />
+          <Image source={imagemUri} style={estilos.imagemCarro} />
           <Text style={estilos.nomeCarro}>
             {marca} {modelo}
           </Text>

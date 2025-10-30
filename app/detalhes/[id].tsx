@@ -83,7 +83,7 @@ const DetalhesCarro = () => {
 
   // ✅ Normalização dos campos com base no backend
   const campos = {
-    ano: carro['ano'] ?? 'N/A',
+    ano: carro['ano'] ? parseInt(carro['ano']) : 'N/A',
     categoria: carro['categoria'] ?? 'N/A',
     marca: carro['marca'] ?? 'N/A',
     modelo: carro['modelo'] ?? 'N/A',
